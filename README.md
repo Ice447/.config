@@ -1,3 +1,5 @@
+## BIG AI SLOP WATCH OUT
+
 # Sway Rice
 
 Personal Wayland desktop configuration for Sway, Waybar, Wofi, and Matugen.
