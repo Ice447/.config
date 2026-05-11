@@ -7,7 +7,7 @@ Personal Wayland desktop configuration for Sway, Waybar, Wofi, and Matugen.
 - Sway config split into `sway/config.d/`
 - Waybar config, styling, and custom modules
 - Wofi launcher styling
-- Matugen templates for wallpaper-based colors
+- Matugen templates for wallpaper-based Sway, Swaylock, Waybar, and Wofi colors
 - Helper scripts for media controls, power profiles, system toggles, and Home Assistant widgets
 
 ## Dependencies
