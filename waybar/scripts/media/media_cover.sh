@@ -6,6 +6,7 @@ cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/waybar-media"
 cover_path="$cache_dir/cover.png"
 state_path="$cache_dir/art-url"
 tmp_path="$cache_dir/source"
+playerctl_cmd="$HOME/.config/waybar/scripts/media/playerctl-priority.sh"
 
 if ! mkdir -p "$cache_dir" 2>/dev/null; then
     cache_dir="/tmp/waybar-media-${USER:-user}"
@@ -15,8 +16,8 @@ if ! mkdir -p "$cache_dir" 2>/dev/null; then
     mkdir -p "$cache_dir"
 fi
 
-art_url="$(playerctl metadata mpris:artUrl 2>/dev/null || true)"
-tooltip="$(playerctl metadata --format '{{artist}} - {{title}}' 2>/dev/null || true)"
+art_url="$("$playerctl_cmd" metadata mpris:artUrl 2>/dev/null || true)"
+tooltip="$("$playerctl_cmd" metadata --format '{{artist}} - {{title}}' 2>/dev/null || true)"
 
 if [ -z "$art_url" ]; then
     rm -f "$cover_path" "$state_path" "$tmp_path" 2>/dev/null || true

@@ -2,9 +2,11 @@
 
 set -u
 
-status="$(playerctl status 2>/dev/null || true)"
-title="$(playerctl metadata title 2>/dev/null || true)"
-player="$(playerctl metadata --format '{{playerName}}' 2>/dev/null || true)"
+playerctl_cmd="$HOME/.config/waybar/scripts/media/playerctl-priority.sh"
+
+status="$("$playerctl_cmd" status 2>/dev/null || true)"
+title="$("$playerctl_cmd" metadata title 2>/dev/null || true)"
+player="$("$playerctl_cmd" metadata --format '{{playerName}}' 2>/dev/null || true)"
 
 if [ -n "$title" ]; then
     text="$title"

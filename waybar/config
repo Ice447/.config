@@ -30,29 +30,29 @@
         "exec": "~/.config/waybar/scripts/media/media_cover.sh",
         "size": 21,
         "interval": 1,
-        "on-click": "playerctl play-pause",
+        "on-click": "~/.config/waybar/scripts/media/playerctl-priority.sh play-pause",
         "tooltip": true
     },
     "custom/media_prev": {
-        "exec": "playerctl status >/dev/null 2>&1 && echo '󰒮'",
+        "exec": "~/.config/waybar/scripts/media/playerctl-priority.sh status >/dev/null 2>&1 && echo '󰒮'",
         "exec-if": "~/.config/waybar/scripts/media/media_visible.sh",
         "interval": 1,
         "tooltip-format": "Vorheriger Titel",
-        "on-click": "playerctl previous"
+        "on-click": "~/.config/waybar/scripts/media/playerctl-priority.sh previous"
     },
     "custom/media_toggle": {
         "exec": "~/.config/waybar/scripts/media/media_toggle.sh",
         "exec-if": "~/.config/waybar/scripts/media/media_visible.sh",
         "return-type": "json",
         "interval": 1,
-        "on-click": "playerctl play-pause"
+        "on-click": "~/.config/waybar/scripts/media/playerctl-priority.sh play-pause"
     },
     "custom/media_next": {
-        "exec": "playerctl status >/dev/null 2>&1 && echo '󰒭'",
+        "exec": "~/.config/waybar/scripts/media/playerctl-priority.sh status >/dev/null 2>&1 && echo '󰒭'",
         "exec-if": "~/.config/waybar/scripts/media/media_visible.sh",
         "interval": 1,
         "tooltip-format": "Naechster Titel",
-        "on-click": "playerctl next"
+        "on-click": "~/.config/waybar/scripts/media/playerctl-priority.sh next"
     },
     "custom/media_info": {
         "exec": "~/.config/waybar/scripts/media/media_info.sh",
@@ -60,9 +60,9 @@
         "return-type": "json",
         "interval": 1,
         "max-length": 34,
-        "on-click": "playerctl play-pause",
-        "on-click-middle": "playerctl previous",
-        "on-click-right": "playerctl next"
+        "on-click": "~/.config/waybar/scripts/media/playerctl-priority.sh play-pause",
+        "on-click-middle": "~/.config/waybar/scripts/media/playerctl-priority.sh previous",
+        "on-click-right": "~/.config/waybar/scripts/media/playerctl-priority.sh next"
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",

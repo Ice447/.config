@@ -4,6 +4,7 @@ set -u
 
 cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/waybar-media"
 pause_hide_after=30
+playerctl_cmd="$HOME/.config/waybar/scripts/media/playerctl-priority.sh"
 
 clear_media_cache() {
     rm -f "$cache_dir/cover.png" "$cache_dir/art-url" "$cache_dir/source" "$pause_state" 2>/dev/null || true
@@ -15,7 +16,7 @@ if ! mkdir -p "$cache_dir" 2>/dev/null; then
 fi
 
 pause_state="$cache_dir/pause-since"
-status="$(playerctl status 2>/dev/null || true)"
+status="$("$playerctl_cmd" status 2>/dev/null || true)"
 
 case "$status" in
     Playing)
