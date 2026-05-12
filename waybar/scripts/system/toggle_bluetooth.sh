@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 state_dir="${XDG_CACHE_HOME:-$HOME/.cache}/waybar-system"
 state_file="${state_dir}/bluetooth-state"

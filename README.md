@@ -1,20 +1,26 @@
-## BIG AI SLOP WATCH OUT
+# Sway Desktop Configuration
 
-# Sway Rice
+Personal desktop configuration for Sway, Waybar, Wofi, and Matugen.
 
-Personal Wayland desktop configuration for Sway, Waybar, Wofi, and Matugen.
+## What Is Here
 
-## Included
+- `sway/`: compositor config, keybindings, idle behavior, lock screen scripts, and generated theme colors.
+- `waybar/`: bar config, generated CSS, and small helper scripts for media, power profiles, and system toggles.
+- `wofi/`: launcher config, generated CSS, and launcher wrapper.
+- `matugen/`: wallpaper-based theme templates and the script that regenerates Sway, Waybar, Wofi, and lock screen colors.
 
-- Sway config split into `sway/config.d/`
-- Waybar config, styling, and custom modules
-- Wofi launcher styling
-- Matugen templates for wallpaper-based Sway, Swaylock, Waybar, and Wofi colors
-- Helper scripts for media controls, power profiles, system toggles, and Home Assistant widgets
+Generated files are kept in the repo because they are the active files used by the desktop session:
+
+- `sway/config.d/theme.conf`
+- `sway/scripts/lock-colors.sh`
+- `waybar/style.css`
+- `wofi/style.css`
+
+When changing generated styling, edit the matching file in `matugen/templates/` too.
 
 ## Dependencies
 
-Core:
+Core session tools:
 
 - `sway`
 - `waybar`
@@ -23,23 +29,27 @@ Core:
 - `swayidle`
 - `swaylock`
 
-Scripts and modules also expect:
+Helper scripts expect:
 
+- `bash`
+- `python3`
 - `playerctl`
 - `curl`
-- `python3`
 - `imagemagick`
 - `powerprofilesctl`
 - `nmcli`
 - `bluetoothctl`
 - `pactl`
+- `brightnessctl`
 - `grim`
 - `slurp`
 - `wl-copy`
 - `wl-paste`
 - `cliphist`
+- `swaynag`
+- `notify-send` (optional notifications)
 
-Configured apps and tools referenced by keybindings or autostart:
+Configured apps referenced by autostart or keybindings:
 
 - `foot`
 - `firefox`
@@ -51,34 +61,32 @@ Configured apps and tools referenced by keybindings or autostart:
 - `pavucontrol`
 - `nm-connection-editor`
 
-## Local Files
+## Common Commands
 
-Secrets are intentionally not tracked. For Home Assistant widgets, copy the example file and fill in local values:
+Apply wallpaper colors without reloading Sway:
 
 ```sh
-cp waybar/secrets/homeassistant.env.example waybar/secrets/homeassistant.env
+~/.config/matugen/scripts/apply-wallpaper-theme.sh --no-reload
 ```
 
-Wallpaper-based theming expects:
-
-- `~/.wallpaper/background.png`
-
-You can also pass a wallpaper directly:
+Apply colors from a specific wallpaper and reload Sway:
 
 ```sh
 ~/.config/matugen/scripts/apply-wallpaper-theme.sh /path/to/wallpaper.png
 ```
 
-## Layout
+Reload the running Sway session:
 
-```text
-matugen/  color generation config and templates
-sway/     window manager config and scripts
-waybar/   bar config, style, modules, and scripts
-wofi/     launcher config, style, and script
+```sh
+swaymsg reload
 ```
 
-# Read me !!!!!!!!!!!!!!!!!!
-Inspiration: https://www.reddit.com/r/unixporn/comments/nnraix/sway_my_rice_that_just_never_gets_finished/
+## Local Assumptions
 
-Nearly all code is AI generated, aswell as this readme. This is kinda just a big test what i can build with just ChatGPT prompting. The code is alot of Spaghetti, though kinda functional.  
+The default wallpaper path is:
+
+```text
+~/.wallpaper/background.png
+```
+
+The repo lives directly under `~/.config`, so `.gitignore` ignores everything by default and then allows only this dotfiles codebase.

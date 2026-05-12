@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-profile=$(powerprofilesctl get 2>/dev/null)
+set -u
+
+profile="$(powerprofilesctl get 2>/dev/null || true)"
 
 case "$profile" in
     performance)

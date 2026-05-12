@@ -2,7 +2,25 @@
 set -euo pipefail
 
 config="$HOME/.config/matugen/config.toml"
-wallpaper="${1:-}"
+wallpaper=""
+reload_sway=true
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --no-reload)
+            reload_sway=false
+            shift
+            ;;
+        -*)
+            echo "unknown option: $1" >&2
+            exit 1
+            ;;
+        *)
+            wallpaper="$1"
+            shift
+            ;;
+    esac
+done
 
 if [[ -z "$wallpaper" ]]; then
     wallpaper="$HOME/.wallpaper/background.png"
@@ -39,7 +57,7 @@ matugen image "$wallpaper" \
     --prefer saturation \
     --quiet
 
-if command -v swaymsg >/dev/null 2>&1; then
+if [[ "$reload_sway" == true ]] && command -v swaymsg >/dev/null 2>&1; then
     swaymsg reload >/dev/null 2>&1 || true
 fi
 

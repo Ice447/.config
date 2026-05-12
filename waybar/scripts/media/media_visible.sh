@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 
-set -u
+set -euo pipefail
 
 cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/waybar-media"
-pause_hide_after=30
+pause_hide_after=5
 playerctl_cmd="$HOME/.config/waybar/scripts/media/playerctl-priority.sh"
 
 clear_media_cache() {
     rm -f "$cache_dir/cover.png" "$cache_dir/art-url" "$cache_dir/source" "$pause_state" 2>/dev/null || true
+}
+
+is_timestamp() {
+    case "${1:-}" in
+        ''|*[!0-9]*) return 1 ;;
+        *) return 0 ;;
+    esac
 }
 
 if ! mkdir -p "$cache_dir" 2>/dev/null; then
@@ -33,12 +40,10 @@ case "$status" in
 
         pause_started="$(cat "$pause_state" 2>/dev/null || printf '%s' "$now")"
 
-        case "$pause_started" in
-            *[!0-9]*|'')
-                printf '%s\n' "$now" > "$pause_state"
-                exit 0
-                ;;
-        esac
+        if ! is_timestamp "$pause_started"; then
+            printf '%s\n' "$now" > "$pause_state"
+            exit 0
+        fi
 
         if [ $((now - pause_started)) -ge "$pause_hide_after" ]; then
             exit 1

@@ -7,32 +7,14 @@ playerctl_cmd="$HOME/.config/waybar/scripts/media/playerctl-priority.sh"
 status="$("$playerctl_cmd" status 2>/dev/null || true)"
 title="$("$playerctl_cmd" metadata title 2>/dev/null || true)"
 player="$("$playerctl_cmd" metadata --format '{{playerName}}' 2>/dev/null || true)"
-
-if [ -n "$title" ]; then
-    text="$title"
-else
-    text="$player"
-fi
-
-if [ -n "$player" ] && [ -n "$title" ]; then
-    tooltip="${player}: ${title}"
-else
-    tooltip="${player}${title}"
-fi
+text="󰒭"
 
 case "$status" in
-    Playing)
+    Playing|Paused)
         if [ -n "$title" ] || [ -n "$player" ]; then
-            class="playing"
+            class=""
         else
-            class="hidden"
-        fi
-        ;;
-    Paused)
-        if [ -n "$title" ] || [ -n "$player" ]; then
-            class="paused"
-        else
-            class="hidden"
+            class="collapsed"
         fi
         ;;
     *)
@@ -42,4 +24,4 @@ case "$status" in
 esac
 
 python3 -c 'import json, sys; print(json.dumps({"text": sys.argv[1], "tooltip": sys.argv[2], "class": sys.argv[3]}))' \
-    "$text" "$tooltip" "$class"
+    "$text" "Naechster Titel" "$class"

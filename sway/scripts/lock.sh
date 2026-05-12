@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -u
 
 BAT_CAP=$(cat /sys/class/power_supply/BAT*/capacity 2>/dev/null | head -n 1)
 BAT_CAP=${BAT_CAP:-"--"}
@@ -63,13 +65,13 @@ swaylock \
     --bs-hl-color "$(hex_color "$LOCK_BS_HL_COLOR")" \
     --caps-lock-bs-hl-color "$(hex_color "$LOCK_CAPS_LOCK_BS_HL_COLOR")" \
     --caps-lock-key-hl-color "$(hex_color "$LOCK_CAPS_LOCK_KEY_HL_COLOR")" \
-    --inside-color "$(hex_alpha "$LOCK_INSIDE_COLOR" cc)" \
-    --inside-clear-color "$(hex_alpha "$LOCK_INSIDE_CLEAR_COLOR" cc)" \
-    --inside-caps-lock-color "$(hex_alpha "$LOCK_INSIDE_CAPS_LOCK_COLOR" cc)" \
-    --inside-ver-color "$(hex_alpha "$LOCK_INSIDE_VERIFY_COLOR" cc)" \
-    --inside-wrong-color "$(hex_alpha "$LOCK_INSIDE_WRONG_COLOR" cc)" \
+    --inside-color "$(hex_alpha "$LOCK_INSIDE_COLOR" aa)" \
+    --inside-clear-color "$(hex_alpha "$LOCK_INSIDE_CLEAR_COLOR" aa)" \
+    --inside-caps-lock-color "$(hex_alpha "$LOCK_INSIDE_CAPS_LOCK_COLOR" aa)" \
+    --inside-ver-color "$(hex_alpha "$LOCK_INSIDE_VERIFY_COLOR" aa)" \
+    --inside-wrong-color "$(hex_alpha "$LOCK_INSIDE_WRONG_COLOR" aa)" \
     --key-hl-color "$(hex_color "$LOCK_KEY_HL_COLOR")" \
-    --layout-bg-color "$(hex_alpha "$LOCK_LAYOUT_BG_COLOR" cc)" \
+    --layout-bg-color "$(hex_alpha "$LOCK_LAYOUT_BG_COLOR" aa)" \
     --layout-border-color "$(hex_color "$LOCK_LAYOUT_BORDER_COLOR")" \
     --layout-text-color "$(hex_color "$LOCK_LAYOUT_TEXT_COLOR")" \
     --line-color "$(hex_color "$LOCK_LINE_COLOR")" \

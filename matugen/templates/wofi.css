@@ -5,6 +5,7 @@
 @define-color muted {{ colors.on_surface_variant.default.hex }};
 @define-color accent {{ colors.primary.default.hex }};
 @define-color on_accent {{ colors.on_primary.default.hex }};
+@define-color outline {{ colors.outline_variant.default.hex }};
 
 /* Base */
 * {
@@ -27,15 +28,16 @@ window {
 #input {
     margin: 12px;
     padding: 8px 12px;
-    background-color: @surface_low;
-    color: @text;
+    background-color: alpha(@surface_low, 0.72);
+    color: @muted;
     border-radius: 8px;
     font-weight: bold;
 }
 
 #input:focus {
-    border: none;
+    border: 1px solid alpha(@accent, 0.72);
     box-shadow: none;
+    color: @text;
 }
 
 /* Layout */
@@ -46,7 +48,8 @@ window {
 
 #outer-box {
     margin: 4px;
-    background-color: @surface;
+    background-color: alpha(@surface, 0.82);
+    border: 1px solid alpha(@outline, 0.55);
     border-radius: 10px;
 }
 
@@ -64,7 +67,7 @@ window {
 }
 
 #entry:selected {
-    background-color: @accent;
+    background-color: alpha(@accent, 0.72);
 }
 
 #text {
@@ -73,6 +76,6 @@ window {
 }
 
 #entry:selected #text {
-    color: @on_accent;
+    color: @text;
     font-weight: bold;
 }

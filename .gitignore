@@ -1,5 +1,6 @@
 *
 !.gitignore
+!.editorconfig
 !README.md
 !sway/
 !sway/**
@@ -9,6 +10,3 @@
 !waybar/**
 !matugen/
 !matugen/**
-sway/config.save
-waybar/secrets/*.env
-!waybar/secrets/*.example
